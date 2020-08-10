@@ -6,6 +6,7 @@ const UploadForm = () => {
   const [file, setFile] = useState(null);
   // const [progress, setProgress] = useState(0);
   const [url, setUrl] = useState(null);
+  const [images, setImages] = useState(null);
 
   const types = ['image/png', 'image/jpeg'];
   var selected;
@@ -46,6 +47,11 @@ const UploadForm = () => {
           const url = await storageRef.getDownloadURL();
           const res = await axios.post('/api/images/add', { url });
           setUrl(res.data.url);
+          if (images) {
+            setImages([...images, res.data.url]);
+          } else {
+            setImages([res.data.url]);
+          }
           console.log(res.data);
         }
       );
@@ -60,7 +66,7 @@ const UploadForm = () => {
         </label>
         <button>SUBMIT!</button>
       </form>
-      {url && <img src={url} alt='...' />}
+      {images && url && images.map((image) => <img src={image} alt='...' />)}
     </div>
   );
 };
