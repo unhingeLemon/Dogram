@@ -16,6 +16,7 @@ app.use('/api/images', require('./routes/images'));
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
+  console.log('prod prod');
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) =>
@@ -24,5 +25,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => {
-  console.log('SERVER IS AT: http://localhost:5000/');
+  console.log('SERVER IS AT: http://localhost:5000');
 });

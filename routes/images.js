@@ -13,11 +13,27 @@ router.post('/add', async (req, res) => {
     });
     const image = await newImage.save();
     res.json(image);
-    console.log(image);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
   }
 });
+
+// @route GET api/images
+// @desc GET the images url
+
+router.get('/',async(req,res)=>{
+
+  try {
+    const images = await Image.find({});
+    
+    res.json(images)
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error')
+  }
+
+
+})
 
 module.exports = router;

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { projectStorage } from '../firebase/config';
 import axios from 'axios';
 
-const UploadForm = () => {
+const UploadForm = ({images,setImages}) => {
   const [file, setFile] = useState(null);
   // const [progress, setProgress] = useState(0);
   const [url, setUrl] = useState(null);
-  const [images, setImages] = useState(null);
 
   const types = ['image/png', 'image/jpeg'];
   var selected;
@@ -48,14 +47,15 @@ const UploadForm = () => {
           const res = await axios.post('/api/images/add', { url });
           setUrl(res.data.url);
           if (images) {
-            setImages([...images, res.data.url]);
+            setImages([...images, res.data]);
           } else {
-            setImages([res.data.url]);
+            setImages([res.data]);
           }
           console.log(res.data);
         }
       );
     }
+    //eslint-disable-next-line
   }, [file]);
 
   return (
@@ -66,7 +66,6 @@ const UploadForm = () => {
         </label>
         <button>SUBMIT!</button>
       </form>
-      {images && url && images.map((image) => <img src={image} alt='...' />)}
     </div>
   );
 };
