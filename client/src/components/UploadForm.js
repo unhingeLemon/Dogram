@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { projectStorage } from '../firebase/config';
 import axios from 'axios';
 
-const UploadForm = ({images,setImages}) => {
+const UploadForm = ({ images, setImages }) => {
   const [file, setFile] = useState(null);
   // const [progress, setProgress] = useState(0);
   const [url, setUrl] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   const types = ['image/png', 'image/jpeg'];
-  var selected;
+
   const onChange = (e) => {
-    selected = e.target.files[0];
+    setSelected(e.target.files[0]);
     console.log(selected);
   };
 
@@ -63,6 +64,7 @@ const UploadForm = ({images,setImages}) => {
       <form className='container' onSubmit={handleSubmit}>
         <label>
           <input type='file' onChange={onChange} />
+          <span>+</span>
         </label>
         <button>SUBMIT!</button>
       </form>

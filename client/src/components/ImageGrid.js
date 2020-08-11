@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-const ImageGrid = ({images}) => {
-    return (
-        <div className="container grid-container">
-              {images && images.map((image) => <img key={image._id} src={image.url} alt='...' />)}
-        </div>
-    )
-}
+const ImageGrid = ({ images }) => {
+  return (
+    <div className='img-grid'>
+      {images &&
+        images.map((image) => (
+          <div className='img-wrap'>
+            <img key={image._id} src={image.url} alt='...' />
+          </div>
+        ))}
+    </div>
+  );
+};
 
-export default ImageGrid
+export default ImageGrid;
